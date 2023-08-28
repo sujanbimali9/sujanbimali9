@@ -12,7 +12,7 @@ echo sujan > /etc/hostname
 sed -i "s/127\.0\.0\.1\tlocalhost\.localdomain\tlocalhost/127\.0\.0\.1\tlocalhost\.localdomain\tlocalhost\tsujan/g" /etc/hosts
 
 
-useradd -m -G wheel -s /bin/bash $USER_NAME
+useradd -m -G wheel -s /bin/bash sujan
 echo sujan:bimali123@ | chpasswd
 usermod -c "sujan" sujan
 sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
