@@ -11,17 +11,18 @@ export LANG=en_US.UTF-8
 echo sujan > /etc/hostname
 sed -i "s/127\.0\.0\.1\tlocalhost\.localdomain\tlocalhost/127\.0\.0\.1\tlocalhost\.localdomain\tlocalhost\tsujan/g" /etc/hosts
 
+passwd
 
-useradd -m -G wheel -s /bin/bash sujan
-echo sujan:bimali123@ | chpasswd
-usermod -c "sujan" sujan
+useradd -m sujan
+passwd sujan
+usermod -aG wheel,storage,power,audio sujan
 sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
 
 pacman -S grub efibootmgr dosfstools mtools
 mkdir /boot
 mkdir /boot/efi
 mount /dev/nvme0n1p1 /boot/efi
-sed -i 's/^# GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
+sed -i 's/^#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
 
 pacman -S os-prober
 
